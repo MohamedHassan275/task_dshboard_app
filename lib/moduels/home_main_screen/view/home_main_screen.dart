@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:task_dshboard_app/moduels/home_main_screen/cubit/home_main_cubit.dart';
 
-import '../../app/app_manger/color_manger.dart';
+import '../../../app/app_manger/color_manger.dart';
 
 class HomeMainScreen extends StatefulWidget {
   const HomeMainScreen({Key? key}) : super(key: key);

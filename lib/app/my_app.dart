@@ -4,7 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:task_dshboard_app/moduels/dashboard_screen/view/dashboard_screen.dart';
 import 'package:task_dshboard_app/moduels/home_main_screen/cubit/home_main_cubit.dart';
 
-import '../moduels/home_main_screen/home_main_screen.dart';
+import '../moduels/home_main_screen/view/home_main_screen.dart';
 
 class MyApp extends StatefulWidget {
 

@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:task_dshboard_app/moduels/dashboard_screen/view/widget/category_home_widget.dart';
+import 'package:task_dshboard_app/moduels/dashboard_screen/view/widget/order_home_widget.dart';
+import 'package:task_dshboard_app/moduels/dashboard_screen/view/widget/service_home_widget.dart';
 import 'package:task_dshboard_app/moduels/dashboard_screen/view/widget/slider_widget.dart';
 import '../../../app/app_manger/color_manger.dart';
 import '../../../app/widget/custom_button.dart';
@@ -142,11 +144,21 @@ class _DashboardScreenState extends State<DashboardScreen> {
                   ],
                 ),),
                 SizedBox(height: 25.h,),
-                const Expanded(
+                  Expanded(
                     child: SingleChildScrollView(
                       child: Column(
                         children: [
-                          CategoryHomeWidget()
+                          Visibility(
+                             visible: isCategorySelected == true,
+                              child: const CategoryHomeWidget()),
+                          Visibility(
+                             visible: isOrderSelected == true,
+                              child: const OrderHomeWidget()),
+                          Visibility(
+                             visible: isServiceSelected == true,
+                              child: const ServiceHomeWidget()),
+
+
                         ],
                       ),
                     ))
