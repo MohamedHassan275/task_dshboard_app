@@ -1,10 +1,14 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:task_dshboard_app/app/widget/shimmer.dart';
+import 'package:task_dshboard_app/moduels/dashboard_screen/data/home_cubit/home_cubit.dart';
 
 import '../../../../app/app_manger/color_manger.dart';
+import 'all_user_widget.dart';
 
 class CategoryHomeWidget extends StatefulWidget {
   const CategoryHomeWidget({Key? key}) : super(key: key);
@@ -14,77 +18,56 @@ class CategoryHomeWidget extends StatefulWidget {
 }
 
 class _CategoryHomeWidgetState extends State<CategoryHomeWidget> {
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    HomeCubit.get(context).userModel == null ?
+    HomeCubit.get(context).userContentService() : null;
+
+  }
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 10.w),
-      child: Column(
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text('Categories View',
-                  style: TextStyle(color: AppColors.colorBlack,fontSize: 14.sp)),
-              Text('see all',
-                  style: TextStyle(color: AppColors.colorGreyHome2,fontSize: 12.sp,
-                    decoration: TextDecoration.underline,
-                  )),
-            ],
-          ),
-          SizedBox(height: 10.h,),
-          /// widget category item widget
-          categoryItemWidget('assets/images/svg_image/category_constructions_image.svg','Constructions'),
-          SizedBox(height: 13.h,),
-          categoryItemWidget('assets/images/svg_image/category_insurances_image.svg','Insurances'),
-          SizedBox(height: 13.h,),
-          categoryItemWidget('assets/images/svg_image/category_legal_image.svg','Legal'),
-          SizedBox(height: 13.h,),
-          categoryItemWidget('assets/images/svg_image/category_buy_image.svg','Buy & Sell'),
-          SizedBox(height: 13.h,),
-          categoryItemWidget('assets/images/svg_image/category_account_image.svg','Accounting Services'),
-          SizedBox(height: 13.h,),
-
-        ],
-      ),
-    );
-  }
-
-  Widget categoryItemWidget(categoryImage,title,) =>
-      Card(
-        elevation: 0.2,
-        child: Container(
-          width: MediaQuery.of(context).size.width,
-          height: 48.h,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(8.r),
-            color: AppColors.white
-          ),
-          child: Padding(
+    return BlocBuilder<HomeCubit,HomeState>(
+      builder: (context, state) {
+        HomeCubit homeCubit = HomeCubit.get(context);
+        if(state is UserContentSuccessfullyState){
+          return Padding(
             padding: EdgeInsets.symmetric(horizontal: 10.w),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            child: Column(
               children: [
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    SvgPicture.asset(
-                      categoryImage,
-                      width: 32.w,height: 32.h,
-                    ),
-                    SizedBox(width: 5.w,),
-                    Text(title,
-                        style: TextStyle(color: AppColors.colorBlack,fontSize: 16.sp)),
+                    Text('Categories View',
+                        style: TextStyle(color: AppColors.colorBlack,fontSize: 14.sp)),
+                    Text('see all',
+                        style: TextStyle(color: AppColors.colorGreyHome2,fontSize: 12.sp,
+                          decoration: TextDecoration.underline,
+                        )),
                   ],
                 ),
-                SvgPicture.asset(
-                  'assets/images/svg_image/arrow_category_icon.svg',
-                  width: 25.w,height: 25.h,
-                ),
+                SizedBox(height: 10.h,),
+                /// widget category item widget
+                ListView.builder(
+                  shrinkWrap: true,
+                  itemCount: homeCubit.userModel?.length,
+                  physics: const NeverScrollableScrollPhysics(),
+                  itemBuilder: (context, index) {
+                    return AllUserContentWidget(userList: homeCubit.userModel![index],);
+                  },),
 
               ],
             ),
-          ),
-        ),
-      );
+          );
+        }else {
+         return ShimmerHelper().buildAllUserShimmer(context,height: 50.h,itemCount: 5);
+        }
+      },
+    );
+  }
+
+
 
 }

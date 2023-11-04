@@ -23,7 +23,7 @@ class _HomeMainScreenState extends State<HomeMainScreen> {
         HomeMainCubit homeMainCubit = HomeMainCubit.get(context);
         return Scaffold(
             body: SafeArea(
-              child: Expanded(child: homeMainCubit.widgetpages[homeMainCubit.selectedindex]),
+              child: homeMainCubit.widgetpages[homeMainCubit.selectedindex],
             ),
             bottomNavigationBar: BottomNavigationBar(
               type: BottomNavigationBarType.fixed,

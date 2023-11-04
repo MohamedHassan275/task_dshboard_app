@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:task_dshboard_app/moduels/dashboard_screen/data/home_cubit/home_cubit.dart';
 import 'package:task_dshboard_app/moduels/dashboard_screen/view/dashboard_screen.dart';
 import 'package:task_dshboard_app/moduels/home_main_screen/cubit/home_main_cubit.dart';
 
@@ -21,6 +22,7 @@ class _MyAppState extends State<MyApp> {
       MultiBlocProvider(
         providers: [
           BlocProvider(create: (context) => HomeMainCubit()),
+          BlocProvider(create: (context) => HomeCubit()),
         ],
         child: ScreenUtilInit(
           designSize: const Size(360, 730),

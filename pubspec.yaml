@@ -36,7 +36,10 @@ dependencies:
   dots_indicator: ^3.0.0
   flutter_bloc:
   bloc:
-
+  dio: ^5.2.1+1
+  connectivity: ^3.0.6
+  fluttertoast:
+  shimmer:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
